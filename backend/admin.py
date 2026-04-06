@@ -43,7 +43,9 @@ def create_doctor():
 @admin_bp.put("/doctors/<int:doctor_id>")
 @auth_required(role="admin")
 def update_doctor(doctor_id):
-    doctor = Doctor.query.get_or_404(doctor_id)
+    doctor = db.session.get(Doctor, doctor_id)
+    if not doctor:
+        return jsonify({"message": "Doctor not found."}), 404
     try:
         data = doctor_schema.load(request.get_json() or {})
     except ValidationError as err:
@@ -58,7 +60,9 @@ def update_doctor(doctor_id):
 @admin_bp.delete("/doctors/<int:doctor_id>")
 @auth_required(role="admin")
 def delete_doctor(doctor_id):
-    doctor = Doctor.query.get_or_404(doctor_id)
+    doctor = db.session.get(Doctor, doctor_id)
+    if not doctor:
+        return jsonify({"message": "Doctor not found."}), 404
     db.session.delete(doctor)
     db.session.commit()
     return jsonify({"message": "Doctor deleted successfully."})
@@ -85,7 +89,9 @@ def list_all_appointments():
 @admin_bp.put("/appointments/<int:appointment_id>/status")
 @auth_required(role="admin")
 def update_appointment_status(appointment_id):
-    appointment = Appointment.query.get_or_404(appointment_id)
+    appointment = db.session.get(Appointment, appointment_id)
+    if not appointment:
+        return jsonify({"message": "Appointment not found."}), 404
     try:
         data = status_schema.load(request.get_json() or {})
     except ValidationError as err:

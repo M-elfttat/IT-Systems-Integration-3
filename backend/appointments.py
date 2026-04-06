@@ -19,7 +19,7 @@ def create_appointment():
     except ValidationError as err:
         return jsonify({"errors": err.messages}), 400
 
-    doctor = Doctor.query.get(data["doctor_id"])
+    doctor = db.session.get(Doctor, data["doctor_id"])
     if not doctor:
         return jsonify({"message": "Doctor not found."}), 404
 

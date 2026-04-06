@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Doctor Appointment Booking System</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <div>
+        <h1>Admin Dashboard</h1>
+        <p class="subtitle">Manage doctors and monitor appointments</p>
+      </div>
+      <nav>
+        <a href="admin.html">Admin</a>
+        <a href="#doctorFormSection">Manage Doctors</a>
+        <a href="#appointmentsSection">Appointments</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container admin-layout">
+    <section class="panel summary-panel">
+      <h2>System Summary</h2>
+      <div id="summaryCards" class="stats-grid"></div>
+    </section>
+
+    <section class="panel" id="doctorFormSection">
+      <h2>Add Doctor</h2>
+      <form id="doctorForm">
+        <label>Doctor Name</label>
+        <input type="text" id="full_name" required>
+        <label>Specialization</label>
+        <input type="text" id="specialization" required>
+        <label>Availability</label>
+        <input type="text" id="availability" placeholder="Sun-Thu 9:00 AM - 1:00 PM" required>
+        <label>Email</label>
+        <input type="email" id="email" required>
+        <label>Phone</label>
+        <input type="text" id="phone" required>
+        <button type="submit">Add Doctor</button>
+      </form>
+      <p id="doctorMessage" class="message"></p>
+    </section>
+
+    <section class="panel">
+      <h2>Doctors</h2>
+      <div id="doctorList" class="card-list"></div>
+    </section>
+
+    <section class="panel" id="appointmentsSection">
+      <h2>Appointments</h2>
+      <div id="appointmentList" class="card-list"></div>
+    </section>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

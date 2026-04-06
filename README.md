@@ -1,157 +1,62 @@
-# Phase 2 - Doctor Appointment Booking System
+# Doctor Appointment Booking System - Phase 2
 
-This project is a Phase 2 implementation for the **Doctor Appointment Booking System** based on the user's Phase 1 design. It includes a working Flask application, PostgreSQL-ready schema, authentication, doctor listing, appointment booking, appointment tracking, admin management, and a Postman collection for endpoint testing.
+This project is rebuilt as a **separate frontend and backend** application to match the Phase 2 rubric while staying aligned with the Phase 1 design.
 
-## What is included
-- Flask backend with REST APIs
-- JWT authentication
-- Password hashing with bcrypt
-- Input validation using Marshmallow
-- PostgreSQL schema (`backend/schema.sql`)
-- Seed script for demo data
-- Frontend pages that follow the same Phase 1 structure:
-  - Login / Register
-  - Patient Dashboard
-  - Doctor List
-  - Appointment Booking
-  - Admin Dashboard
-- Postman collection in `docs/Doctor_Appointment_Booking_Postman_Collection.json`
+## Project Structure
 
-## Project structure
-```text
-phase2_app/
-├── backend/
-│   ├── app.py
-│   ├── auth.py
-│   ├── doctors.py
-│   ├── appointments.py
-│   ├── admin.py
-│   ├── models.py
-│   ├── schemas.py
-│   ├── decorators.py
-│   ├── config.py
-│   ├── extensions.py
-│   ├── utils.py
-│   ├── seed.py
-│   ├── schema.sql
-│   ├── requirements.txt
-│   ├── .env.example
-│   ├── static/
-│   └── templates/
-└── docs/
-    └── Doctor_Appointment_Booking_Postman_Collection.json
-```
+- `backend/` Flask REST API + PostgreSQL-ready database
+- `frontend/` Separate client built with HTML, CSS, and JavaScript
+- `docs/` Postman collection
 
-## Requirements
-- Python 3.10+
-- PostgreSQL 14+ recommended
+## Main Features
 
-## Setup steps
-### 1. Create a virtual environment
-```bash
-cd backend
-python -m venv venv
-```
+- Patient registration and login
+- Doctor listing by specialization and availability
+- Appointment booking and appointment tracking
+- Admin dashboard for doctor and appointment monitoring
+- JWT authentication, password hashing, and input validation
 
-### 2. Activate it
-#### Windows PowerShell
-```bash
-venv\Scripts\Activate.ps1
-```
+## Backend Setup
 
-#### Windows CMD
-```bash
-venv\Scripts\activate.bat
-```
+1. Open terminal in `backend`
+2. Create virtual environment:
+   - `python -m venv venv`
+3. Activate it:
+   - PowerShell: `venv\Scripts\Activate.ps1`
+4. Install packages:
+   - `pip install -r requirements.txt`
+5. Copy `.env.example` to `.env`
+6. Set your PostgreSQL connection in `.env`
+7. Create database in PostgreSQL:
+   - `CREATE DATABASE doctor_booking_db;`
+8. Seed the database:
+   - `python seed.py`
+9. Run backend:
+   - `python app.py`
 
-### 3. Install dependencies
-```bash
-pip install -r requirements.txt
-```
+Backend URL:
+- `http://127.0.0.1:5000`
 
-### 4. Create PostgreSQL database
-Open PostgreSQL and create a database:
-```sql
-CREATE DATABASE doctor_booking_db;
-```
+Demo admin login:
+- Email: `admin@clinic.com`
+- Password: `Admin123`
 
-### 5. Add environment variables
-Copy `.env.example` to `.env` and update values if needed.
+## Frontend Setup
 
-Example:
-```env
-SECRET_KEY=change-me-in-production
-JWT_SECRET_KEY=change-me-too
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/doctor_booking_db
-```
+Open another terminal in `frontend` and run a static server.
 
-### 6. Create tables
-Option A: let Flask create the tables automatically when it starts.
+### Option 1: VS Code Live Server
+- Right click `index.html`
+- Open with Live Server
 
-Option B: run the PostgreSQL schema manually:
-```bash
-psql -U postgres -d doctor_booking_db -f schema.sql
-```
+### Option 2: Python simple server
+- `python -m http.server 5500`
 
-### 7. Seed demo data
-```bash
-python seed.py
-```
-This creates:
-- admin user: `admin@clinic.com`
-- admin password: `Admin123`
-- sample doctors
-
-### 8. Run the application
-```bash
-python app.py
-```
-
-Open:
-- `http://127.0.0.1:5000/`
-
-## Main features
-### Patient
-- Register account
-- Login
-- View doctor list
-- Book appointment
-- Track own appointments
-
-### Admin
-- Login
-- View dashboard summary
-- Add doctors
-- Monitor appointments
-
-## Security implemented
-- JWT authentication for protected routes
-- Password hashing with bcrypt
-- Input validation using Marshmallow
-- Role-based access control for admin-only endpoints
-
-## Main API endpoints
-### Auth
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-
-### Doctors
-- `GET /api/doctors`
-- `GET /api/doctors/<id>`
-
-### Appointments
-- `POST /api/appointments`
-- `GET /api/appointments`
-
-### Admin
-- `GET /api/admin/dashboard`
-- `POST /api/admin/doctors`
-- `PUT /api/admin/doctors/<id>`
-- `DELETE /api/admin/doctors/<id>`
-- `GET /api/admin/appointments`
-- `PUT /api/admin/appointments/<id>/status`
+Frontend URL:
+- `http://127.0.0.1:5500`
 
 ## Notes
-- The app is **PostgreSQL-ready** and includes a PostgreSQL schema to match the ER design.
-- For easier first-run testing, the config also falls back to SQLite if `DATABASE_URL` is not set. For the rubric, use PostgreSQL.
-- Postman screenshots are not included because they must be taken from your own running environment after testing.
+
+- The frontend uses `frontend/js/config.js` to point to the backend API.
+- Default API base URL is `http://127.0.0.1:5000/api`
+- If PostgreSQL is not configured yet, the backend falls back to SQLite for quick testing, but Phase 2 should use PostgreSQL for rubric compliance.

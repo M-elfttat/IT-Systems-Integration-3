@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify
 from config import Config
 from extensions import bcrypt, cors, db, migrate
 from auth import auth_bp
@@ -14,7 +14,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     bcrypt.init_app(app)
-    cors.init_app(app)
+    cors.init_app(app, resources={r"/api/*": {"origins": [app.config["FRONTEND_ORIGIN"], "http://localhost:5500", "http://127.0.0.1:5500", "null"]}})
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(doctors_bp)
@@ -23,23 +23,10 @@ def create_app():
 
     @app.get("/")
     def home():
-        return render_template("login.html")
-
-    @app.get("/dashboard")
-    def dashboard_page():
-        return render_template("dashboard.html")
-
-    @app.get("/doctors-page")
-    def doctors_page():
-        return render_template("doctors.html")
-
-    @app.get("/book")
-    def booking_page():
-        return render_template("book.html")
-
-    @app.get("/admin-page")
-    def admin_page():
-        return render_template("admin.html")
+        return jsonify({
+            "message": "Doctor Appointment Booking API is running.",
+            "frontend": app.config["FRONTEND_ORIGIN"],
+        })
 
     return app
 

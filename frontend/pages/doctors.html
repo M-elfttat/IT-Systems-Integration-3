@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctors - Doctor Appointment Booking System</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <div>
+        <h1>Doctor List</h1>
+        <p class="subtitle">Choose a doctor by specialization and availability</p>
+      </div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="book.html">Book</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container single-panel-page">
+    <section class="panel">
+      <h2>Available Doctors</h2>
+      <div id="doctorList" class="card-list"></div>
+    </section>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/doctors.js"></script>
+</body>
+</html>

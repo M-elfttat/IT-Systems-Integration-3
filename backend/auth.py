@@ -18,7 +18,7 @@ def register():
     except ValidationError as err:
         return jsonify({"errors": err.messages}), 400
 
-    if Patient.query.filter_by(email=data["email"]).first():
+    if Patient.query.filter_by(email=data["email"]).first() or Admin.query.filter_by(email=data["email"]).first():
         return jsonify({"message": "Email is already registered."}), 409
 
     patient = Patient(
