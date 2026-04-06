@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctor Appointment Booking System - Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <div class="shell center-shell">
+    <section class="card auth-card">
+      <div class="hero-badge">Phase 2 Implementation</div>
+      <h1>Doctor Appointment Booking System</h1>
+      <p class="subtitle">Patients can register, log in, view doctors, and book appointments. Admins can manage doctors and appointment status.</p>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="login-panel">Login</button>
+        <button class="tab-btn" data-tab="register-panel">Register</button>
+      </div>
+
+      <div id="message-box" class="message hidden"></div>
+
+      <div id="login-panel" class="tab-panel active">
+        <form id="login-form" class="stack">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="Enter your email" required />
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter your password" required />
+          <button type="submit">Login</button>
+        </form>
+        <div class="hint-box">
+          <strong>Demo admin:</strong> admin@clinic.com / Admin123
+        </div>
+      </div>
+
+      <div id="register-panel" class="tab-panel">
+        <form id="register-form" class="stack">
+          <label>Full Name</label>
+          <input type="text" name="full_name" placeholder="Enter your full name" required />
+          <label>Email</label>
+          <input type="email" name="email" placeholder="Enter your email" required />
+          <label>Phone</label>
+          <input type="text" name="phone" placeholder="Enter your phone number" required />
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Create a password" required />
+          <button type="submit">Create Patient Account</button>
+        </form>
+      </div>
+    </section>
+  </div>
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>
