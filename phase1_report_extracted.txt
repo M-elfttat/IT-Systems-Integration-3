@@ -1,0 +1,72 @@
+INFS3202 – IT Systems Integration
+Phase 1: System Design & Planning
+Project Title: Doctor Appointment Booking System
+
+The Doctor Appointment Booking System is a web-based application designed to simplify the process of scheduling medical appointments. The system allows patients to register, log in, view available doctors, and book appointments based on doctor specialization and availability.
+Doctors can manage their appointments and view scheduled patients, while administrators manage doctors and monitor system operations. The system aims to improve efficiency, reduce scheduling conflicts, and provide a convenient platform for both patients and healthcare providers.
+
+Features:
+The main features of the system include:
+Patient registration and login
+Viewing doctor information and specialization
+Booking and managing appointments
+Appointment status tracking
+Administrator management of doctors and appointments
+These features allow secure interaction between users and the system through structured API services.
+
+ER Diagram:
+
+The ER diagram represents the database structure of the Doctor Appointment Booking System. The system contains several entities including Patient, Doctor, Appointment, Payment, and Admin. Each entity represents a table in the database and contains attributes describing the stored data.
+Primary keys uniquely identify each record, while foreign keys establish relationships between tables.
+Relationships
+A Patient can have many Appointments.
+A Doctor can have many Appointments.
+Each Appointment has one Payment record.
+The database design follows normalization principles to maintain data integrity.
+
+Database Normalization (3NF)
+The database schema is designed following Third Normal Form (3NF).
+First Normal Form (1NF):
+All attributes contain atomic values and there are no repeating groups.
+Second Normal Form (2NF):
+All non-key attributes depend fully on the primary key.
+Third Normal Form (3NF):
+There are no transitive dependencies, meaning non-key attributes depend only on the primary key.
+This normalization reduces redundancy and improves data consistency within the system.
+
+Wireframes:
+Figure 1: Login Page Wireframe
+
+The login page allows users to authenticate using their email and password before accessing the system.
+Figure 2: Patient Dashboard Wireframe
+
+The dashboard provides quick access to main system functions such as viewing doctors and booking appointments.
+
+
+
+
+
+
+
+
+Figure 3: Doctor List Page Wireframe
+
+This page displays available doctors along with their specialization and availability. Patients can select a doctor and proceed to booking.
+Figure 4: Appointment Booking Page Wireframe
+
+The booking page allows patients to select a doctor, choose a date and time, and confirm the appointment.
+
+
+
+
+Figure 5: Admin Dashboard Wireframe
+
+The admin interface allows administrators to manage doctors and monitor appointments in the system.
+
+
+System Architecture:
+The system follows a client–server architecture. The frontend client communicates with backend RESTful APIs developed using Flask. These APIs interact with a PostgreSQL database to store and retrieve appointment data securely.
+
+Future Implementation Plan:
+In Phase 2 of the project, the system will be implemented using Flask RESTful APIs and integrated with a PostgreSQL database. The client application will interact with backend services through secure HTTP requests.
+Security features such as authentication, password hashing, and input validation will be implemented to ensure safe system integration.

@@ -1,60 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doctor Appointment Booking System</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="container nav">
-      <div>
-        <h1>Doctor Appointment Booking System</h1>
-        <p class="subtitle">Phase 2 Client Application</p>
-      </div>
-      <nav>
-        <a href="index.html">Login</a>
-        <a href="pages/register.html">Register</a>
-        <a href="pages/dashboard.html">Dashboard</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container auth-layout">
-    <section class="panel welcome-panel">
-      <h2>Book medical appointments easily</h2>
-      <p>
-        Patients can log in, view doctors by specialization, and book appointments.
-        Administrators can manage doctors and monitor appointments.
-      </p>
-      <ul class="feature-list">
-        <li>Patient registration and login</li>
-        <li>Doctor list with specialization and availability</li>
-        <li>Appointment booking and status tracking</li>
-        <li>Admin dashboard for doctor and appointment management</li>
-      </ul>
-    </section>
-
-    <section class="panel auth-panel">
-      <h2>Login</h2>
-      <form id="loginForm">
-        <label>Email</label>
-        <input type="email" id="email" placeholder="Enter your email" required>
-
-        <label>Password</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
-
-        <button type="submit">Login</button>
-      </form>
-      <p id="message" class="message"></p>
-      <p class="small-text">Demo admin: <strong>admin@clinic.com</strong> / <strong>Admin123</strong></p>
-      <p class="small-text">New patient? <a href="pages/register.html">Create an account</a></p>
-    </section>
-  </main>
-
-  <script src="js/config.js"></script>
-  <script src="js/common.js"></script>
-  <script src="js/login.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frontend</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
