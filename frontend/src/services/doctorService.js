@@ -6,4 +6,5 @@ export const doctorService = {
   upsertProfile: async (payload) => (await apiClient.post("/api/doctors/profile", payload)).data,
   myAppointments: async () => (await apiClient.get("/api/doctors/me/appointments")).data,
   myPatients: async () => (await apiClient.get("/api/doctors/me/patients")).data,
+  myNotifications: async () => (await apiClient.get("/api/doctors/me/notifications")).data,
 };

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import get_jwt_identity
@@ -125,15 +125,53 @@ def update_my_appointment(appointment_id):
     appointment = Appointment.query.filter_by(id=appointment_id, patient_id=patient_id).first_or_404()
     data = request.get_json() or {}
 
+    appointment_starts_at = datetime.combine(appointment.appointment_date, appointment.appointment_time)
+    two_hours_from_now = datetime.now() + timedelta(hours=2)
+
     if data.get("status") in ("cancelled",):
+        if appointment_starts_at <= two_hours_from_now:
+            return jsonify({"message": "You can cancel only up to 2 hours before the appointment time"}), 400
         appointment.status = data["status"]
+        db.session.add(
+            ActivityLog(
+                actor_user_id=patient_id,
+                action="cancel_appointment",
+                entity_type="appointment",
+                entity_id=str(appointment.id),
+                details="Patient cancelled appointment",
+            )
+        )
 
     if data.get("appointment_date") and data.get("appointment_time"):
         try:
-            appointment.appointment_date = datetime.strptime(data["appointment_date"], "%Y-%m-%d").date()
-            appointment.appointment_time = datetime.strptime(data["appointment_time"], "%H:%M").time()
+            new_date = datetime.strptime(data["appointment_date"], "%Y-%m-%d").date()
+            new_time = datetime.strptime(data["appointment_time"], "%H:%M").time()
         except ValueError:
             return jsonify({"message": "Invalid date/time format"}), 400
+
+        if appointment_starts_at <= two_hours_from_now:
+            return jsonify({"message": "You can reschedule only up to 2 hours before the appointment time"}), 400
+
+        exists = Appointment.query.filter(
+            Appointment.doctor_id == appointment.doctor_id,
+            Appointment.appointment_date == new_date,
+            Appointment.appointment_time == new_time,
+            Appointment.id != appointment.id,
+        ).first()
+        if exists:
+            return jsonify({"message": "Selected time slot is unavailable"}), 409
+
+        appointment.appointment_date = new_date
+        appointment.appointment_time = new_time
+        db.session.add(
+            ActivityLog(
+                actor_user_id=patient_id,
+                action="reschedule_appointment",
+                entity_type="appointment",
+                entity_id=str(appointment.id),
+                details=f"Patient rescheduled to {new_date.isoformat()} {new_time.isoformat()}",
+            )
+        )
 
     appointment.symptoms_notes = data.get("symptoms_notes", appointment.symptoms_notes)
     db.session.commit()

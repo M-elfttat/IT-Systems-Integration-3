@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
-from app.models import DoctorProfile, User
+from app.models import ActivityLog, Appointment, DoctorProfile, User
 from app.utils import role_required
 
 doctors_bp = Blueprint("doctors", __name__)
@@ -107,6 +107,7 @@ def my_doctor_appointments():
                 "time": row.appointment_time.isoformat(),
                 "status": row.status,
                 "symptoms_notes": row.symptoms_notes,
+                "created_at": row.created_at.isoformat(),
             }
             for row in rows
         ]
@@ -127,3 +128,39 @@ def my_doctor_patients():
             "phone": row.patient.phone,
         }
     return jsonify(list(seen.values()))
+
+
+@doctors_bp.get("/me/notifications")
+@role_required("doctor")
+def my_doctor_notifications():
+    doctor_id = int(get_jwt_identity())
+    events = (
+        ActivityLog.query.filter(
+            ActivityLog.entity_type == "appointment",
+            ActivityLog.action.in_(["create_appointment", "cancel_appointment"]),
+        )
+        .order_by(ActivityLog.created_at.desc())
+        .limit(300)
+        .all()
+    )
+
+    notifications = []
+    for event in events:
+        if not event.entity_id or not event.entity_id.isdigit():
+            continue
+        appointment = Appointment.query.get(int(event.entity_id))
+        if not appointment or appointment.doctor_id != doctor_id:
+            continue
+        notifications.append(
+            {
+                "type": "booking" if event.action == "create_appointment" else "cancellation",
+                "appointment_id": appointment.id,
+                "patient_name": appointment.patient.full_name,
+                "date": appointment.appointment_date.isoformat(),
+                "time": appointment.appointment_time.isoformat(),
+                "created_at": event.created_at.isoformat(),
+                "status": appointment.status,
+            }
+        )
+
+    return jsonify(notifications)

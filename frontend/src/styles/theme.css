@@ -50,3 +50,73 @@ button,.btn { display: inline-block; background: linear-gradient(135deg, var(--b
 table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 10px; overflow: hidden; }
 th,td { border: 1px solid var(--border); padding: .5rem; text-align: left; vertical-align: middle; }
 @media (max-width: 900px) { .layout .body-grid { grid-template-columns: 1fr; } .sidebar { border-right: none; border-bottom: 1px solid var(--border);} }
+
+.feature-grid {
+  margin-top: 0.25rem;
+}
+
+.feature-card {
+  border: 1px solid #cfe3f7;
+  background: linear-gradient(180deg, #fafdff 0%, #f3f8ff 100%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(31, 42, 55, 0.12);
+}
+
+.feature-card h3 {
+  margin: 0 0 0.55rem;
+  color: #144a82;
+}
+
+.feature-card p {
+  margin: 0;
+  color: #47627f;
+  line-height: 1.45;
+}
+
+.doctor-overview .stat-tile {
+  padding: 1.1rem;
+}
+
+.stat-label {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.stat-tile h3 {
+  margin: 0.25rem 0;
+  font-size: 1.8rem;
+  color: #0f6bcf;
+}
+
+.stat-meta {
+  margin: 0;
+  color: var(--muted);
+}
+
+.list-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.list-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fbfdff;
+}
+
+.muted-line {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}

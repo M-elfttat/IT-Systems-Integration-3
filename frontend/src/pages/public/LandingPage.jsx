@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { PageHeader, StatsCard } from "../../components/common";
+import { PageHeader } from "../../components/common";
 
 export default function LandingPage() {
   return (
@@ -13,10 +13,19 @@ export default function LandingPage() {
           <Link className="btn" to="/doctors">Available Doctors</Link>
         </div>
       </div>
-      <div className="grid3">
-        <StatsCard label="Patients" value="Fast booking flow" />
-        <StatsCard label="Doctors" value="Schedule management" />
-        <StatsCard label="Admins" value="System control panel" />
+      <div className="grid3 feature-grid">
+        <div className="card feature-card">
+          <h3>Is this doctor right for me?</h3>
+          <p>Filter by specialty, location, language, and insurance before you book.</p>
+        </div>
+        <div className="card feature-card">
+          <h3>What will this cost me?</h3>
+          <p>See consultation fees upfront and pay securely online with no surprise bills.</p>
+        </div>
+        <div className="card feature-card">
+          <h3>What if I need to cancel?</h3>
+          <p>Reschedule or cancel up to 2 hours before your visit with no penalty and no calls.</p>
+        </div>
       </div>
     </section>
   );

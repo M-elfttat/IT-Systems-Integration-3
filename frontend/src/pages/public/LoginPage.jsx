@@ -6,7 +6,7 @@ import { useAuth } from "../../hooks/useAuth";
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
-  const { login, logout } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
@@ -15,11 +15,6 @@ export default function LoginPage() {
     if (!form.email || !form.password) return setError("Email and password are required.");
     try {
       const user = await login(form);
-      if (user.role === "doctor") {
-        logout();
-        setError("Doctor login is disabled from this portal. Please contact admin.");
-        return;
-      }
       navigate(`/${user.role}/dashboard`);
     } catch (err) {
       setError(err?.response?.data?.message || "Login failed");
