@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctor Appointment Booking System</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">MediBook</div>
+    <nav>
+      <a href="#landing">Home</a>
+      <a href="#doctor-list">Doctors</a>
+      <a href="#booking">Book</a>
+      <a href="#api-testing">API Testing</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="landing" class="hero card">
+      <h1>Doctor Appointment Booking System</h1>
+      <p>Secure, role-based platform for Patients, Doctors, and Admins using Flask APIs and PostgreSQL.</p>
+      <div class="actions">
+        <button id="show-login" class="btn primary">Login</button>
+        <button id="show-register" class="btn secondary">Register</button>
+        <button class="btn info">Find Doctors</button>
+      </div>
+    </section>
+
+    <section class="grid two">
+      <div id="login" class="card">
+        <h2>Login</h2>
+        <input id="login-email" placeholder="Email" />
+        <input id="login-password" type="password" placeholder="Password" />
+        <button id="login-btn" class="btn primary">Sign In</button>
+        <div id="login-msg" class="msg"></div>
+      </div>
+      <div id="register" class="card">
+        <h2>Register</h2>
+        <input id="reg-name" placeholder="Full Name" />
+        <input id="reg-email" placeholder="Email" />
+        <input id="reg-phone" placeholder="Phone" />
+        <input id="reg-password" type="password" placeholder="Password" />
+        <select id="reg-role">
+          <option value="patient">Patient</option>
+          <option value="doctor">Doctor</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button id="register-btn" class="btn secondary">Create Account</button>
+        <div id="register-msg" class="msg"></div>
+      </div>
+    </section>
+
+    <section id="doctor-list" class="card">
+      <h2>Doctor Listing</h2>
+      <div class="actions">
+        <input id="specialization-filter" placeholder="Filter specialization (e.g. Cardiology)" />
+        <button id="load-doctors" class="btn info">Search</button>
+      </div>
+      <div id="doctor-results" class="grid three"></div>
+    </section>
+
+    <section id="booking" class="card">
+      <h2>Appointment Booking</h2>
+      <div class="grid three">
+        <input id="book-doctor-id" placeholder="Doctor ID" />
+        <input id="book-date" type="date" />
+        <input id="book-time" type="time" />
+      </div>
+      <textarea id="book-notes" placeholder="Symptoms / notes"></textarea>
+      <button id="book-btn" class="btn success">Confirm Booking</button>
+      <div id="book-msg" class="msg"></div>
+    </section>
+
+    <section id="patient-dashboard" class="card">
+      <h2>Patient Dashboard</h2>
+      <button id="dashboard-btn" class="btn info">Load Dashboard</button>
+      <pre id="dashboard-data"></pre>
+    </section>
+
+    <section id="my-appointments" class="card">
+      <h2>My Appointments</h2>
+      <button id="appointments-btn" class="btn info">Load Appointments</button>
+      <pre id="appointments-data"></pre>
+    </section>
+
+    <section id="api-testing" class="card">
+      <h2>Presentation API Testing Section</h2>
+      <p>Use the included Postman collection in <code>postman/doctor-appointment.postman_collection.json</code>.</p>
+      <table>
+        <thead><tr><th>Endpoint</th><th>Method</th><th>Auth</th></tr></thead>
+        <tbody>
+          <tr><td>/api/auth/register</td><td><span class="badge info">POST</span></td><td>No</td></tr>
+          <tr><td>/api/auth/login</td><td><span class="badge info">POST</span></td><td>No</td></tr>
+          <tr><td>/api/doctors</td><td><span class="badge success">GET</span></td><td>Optional</td></tr>
+          <tr><td>/api/patients/appointments</td><td><span class="badge info">POST</span></td><td>Patient Token</td></tr>
+          <tr><td>/api/admin/appointments</td><td><span class="badge warning">PATCH</span></td><td>Admin Token</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="architecture" class="card">
+      <h2>System Architecture</h2>
+      <div class="grid five">
+        <div class="node">Frontend Client</div>
+        <div class="node">Flask REST API</div>
+        <div class="node">Auth/Security Layer</div>
+        <div class="node">PostgreSQL</div>
+        <div class="node">ER: Patient, Doctor, Appointment, Payment, Admin</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

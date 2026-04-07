@@ -1,0 +1,133 @@
+{
+  "info": {
+    "name": "Doctor Appointment Booking System API",
+    "_postman_id": "d7ee66fb-778c-45e1-9ce4-49f11cece0b8",
+    "description": "Collection for rubric-aligned API testing (auth, doctor, patient, admin, payment).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Register Patient",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"full_name\": \"Alice Patient\",\n  \"email\": \"alice.patient@example.com\",\n  \"phone\": \"0123456789\",\n  \"password\": \"StrongPass123!\",\n  \"role\": \"patient\"\n}"
+        },
+        "url": "{{base_url}}/api/auth/register"
+      }
+    },
+    {
+      "name": "Auth - Login Patient",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"alice.patient@example.com\",\n  \"password\": \"StrongPass123!\"\n}"
+        },
+        "url": "{{base_url}}/api/auth/login"
+      }
+    },
+    {
+      "name": "Doctors - List",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/doctors"
+      }
+    },
+    {
+      "name": "Patient - Create Appointment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{patient_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"doctor_id\": 2,\n  \"appointment_date\": \"2026-04-20\",\n  \"appointment_time\": \"10:00\",\n  \"symptoms_notes\": \"Headache and dizziness\"\n}"
+        },
+        "url": "{{base_url}}/api/patients/appointments"
+      }
+    },
+    {
+      "name": "Patient - Dashboard",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{patient_token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/patients/dashboard"
+      }
+    },
+    {
+      "name": "Admin - Dashboard",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/admin/dashboard"
+      }
+    },
+    {
+      "name": "Payment - Make Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{patient_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"appointment_id\": 1,\n  \"amount\": 100.0,\n  \"method\": \"card\"\n}"
+        },
+        "url": "{{base_url}}/api/payments"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:5000"
+    },
+    {
+      "key": "patient_token",
+      "value": ""
+    },
+    {
+      "key": "admin_token",
+      "value": ""
+    }
+  ]
+}
